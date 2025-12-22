@@ -32,8 +32,11 @@ export const metadata: Metadata = {
     title: "لوکس شاپ",
     description: "استایل خاص خودت را خلق کن.",
   },
+  // 👇 بخش تغییر یافته: اتصال به فایل icon.svg در پوشه public
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
   }
 };
 
