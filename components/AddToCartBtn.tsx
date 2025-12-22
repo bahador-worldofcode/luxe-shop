@@ -2,7 +2,7 @@
 
 import { useCartStore } from "@/store/cartStore";
 import { ShoppingBag } from "lucide-react";
-import { toast } from "sonner"; // الان دیگه ارور نمیده
+import { toast } from "sonner";
 
 interface Props {
   product: {
@@ -16,16 +16,19 @@ interface Props {
 export default function AddToCartBtn({ product }: Props) {
   const addItem = useCartStore((state) => state.addItem);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault(); // جلوگیری از باز شدن صفحه محصول هنگام کلیک
+    
     addItem({
       id: product.id,
       name: product.name,
       price: product.price,
       image: product.image,
       quantity: 1,
+      color: "تک رنگ", // مقدار پیش‌فرض برای رفع خطا
+      size: "Free Size", // مقدار پیش‌فرض برای رفع خطا
     });
     
-    // نمایش پیام موفقیت زیبا
     toast.success(`${product.name} به سبد خرید اضافه شد`);
   };
 
