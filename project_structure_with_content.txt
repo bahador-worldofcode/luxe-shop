@@ -17,7 +17,6 @@ luxe-shop
 │   │   └── page.tsx
 │   ├── faq
 │   │   └── page.tsx
-│   ├── favicon.ico
 │   ├── globals.css
 │   ├── layout.tsx
 │   ├── page.tsx
@@ -106,14 +105,15 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    // 👇 این خط رو اضافه کن. این معجزه می‌کنه!
-    // باعث میشه نکست دیگه سمت سرور عکس رو دانلود نکنه و ارور نده.
-    unoptimized: true, 
-    
+    // نکته مهم: خط unoptimized را پاک کردیم تا سرور ورسل واسط شود
     remotePatterns: [
       {
         protocol: "https",
         hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "plus.unsplash.com",
       },
     ],
   },
@@ -314,8 +314,11 @@ export const metadata: Metadata = {
     title: "لوکس شاپ",
     description: "استایل خاص خودت را خلق کن.",
   },
+  // 👇 بخش تغییر یافته: اتصال به فایل icon.svg در پوشه public
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
   }
 };
 
@@ -1077,7 +1080,7 @@ export default function TermsPage() {
 
 import { useCartStore } from "@/store/cartStore";
 import { ShoppingBag } from "lucide-react";
-import { toast } from "sonner"; // الان دیگه ارور نمیده
+import { toast } from "sonner";
 
 interface Props {
   product: {
@@ -1091,16 +1094,19 @@ interface Props {
 export default function AddToCartBtn({ product }: Props) {
   const addItem = useCartStore((state) => state.addItem);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault(); // جلوگیری از باز شدن صفحه محصول هنگام کلیک
+    
     addItem({
       id: product.id,
       name: product.name,
       price: product.price,
       image: product.image,
       quantity: 1,
+      color: "تک رنگ", // مقدار پیش‌فرض برای رفع خطا
+      size: "Free Size", // مقدار پیش‌فرض برای رفع خطا
     });
     
-    // نمایش پیام موفقیت زیبا
     toast.success(`${product.name} به سبد خرید اضافه شد`);
   };
 
