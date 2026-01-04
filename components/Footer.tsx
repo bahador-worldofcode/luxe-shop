@@ -1,6 +1,6 @@
 "use client";
 
-import { Instagram, Twitter, Linkedin, MapPin, Phone, Mail, Send, Code2, Heart } from "lucide-react"; // آیکون Code2 و Heart اضافه شد
+import { Instagram, Twitter, Linkedin, MapPin, Phone, Mail, Send, Code2, Heart, Library } from "lucide-react"; // آیکون Library اضافه شد
 import Link from "next/link";
 import Logo from "@/components/Logo";
 
@@ -97,27 +97,39 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* سمت چپ: امضای کیا دِو (Designer Tag) */}
-          <a 
-            href="https://kiyadev.ir" 
-            target="_blank"
-            className="group flex items-center gap-3 bg-gray-50 hover:bg-slate-900 border border-gray-100 px-4 py-2 rounded-xl transition-all duration-300"
-          >
-            <div className="flex flex-col items-end">
-              <span className="text-[10px] text-gray-400 font-medium group-hover:text-gray-300">
-                Design & Engineering by
-              </span>
-              <span className="text-xs font-bold text-gray-700 group-hover:text-white flex items-center gap-1">
-                KiyaDev Team
-                <Code2 className="h-3 w-3 text-blue-500" />
-              </span>
-            </div>
+          {/* سمت چپ: امضاها و لینک شبکه همکاران */}
+          <div className="flex items-center gap-3">
             
-            <div className="h-8 w-8 bg-white group-hover:bg-blue-600 rounded-lg flex items-center justify-center shadow-sm transition-colors">
-               {/* لوگوی مینیاتوری یا آیکون قلب */}
-               <Heart className="h-4 w-4 text-gray-400 group-hover:text-white fill-current transition-colors" />
-            </div>
-          </a>
+            {/* ۱. دکمه شبکه همکاران (لینک مخفی) */}
+            <Link 
+              href="/partners"
+              title="شبکه همکاران تجاری"
+              className="h-12 w-12 bg-gray-50 hover:bg-blue-50 border border-gray-100 hover:border-blue-200 rounded-xl flex items-center justify-center text-gray-400 hover:text-blue-600 transition-all duration-300"
+            >
+               <Library className="h-5 w-5" />
+            </Link>
+
+            {/* ۲. امضای کیا دِو */}
+            <a 
+              href="https://kiyadev.ir" 
+              target="_blank"
+              className="group flex items-center gap-3 bg-gray-50 hover:bg-slate-900 border border-gray-100 px-4 py-2 rounded-xl transition-all duration-300 h-12"
+            >
+              <div className="flex flex-col items-end">
+                <span className="text-[10px] text-gray-400 font-medium group-hover:text-gray-300">
+                  Design & Engineering by
+                </span>
+                <span className="text-xs font-bold text-gray-700 group-hover:text-white flex items-center gap-1">
+                  KiyaDev Team
+                  <Code2 className="h-3 w-3 text-blue-500" />
+                </span>
+              </div>
+              
+              <div className="h-8 w-8 bg-white group-hover:bg-blue-600 rounded-lg flex items-center justify-center shadow-sm transition-colors">
+                 <Heart className="h-4 w-4 text-gray-400 group-hover:text-white fill-current transition-colors" />
+              </div>
+            </a>
+          </div>
 
         </div>
 
