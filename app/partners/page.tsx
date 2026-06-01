@@ -12,11 +12,12 @@ import {
   Zap,
   Bot,
   LayoutDashboard,
-  Code2 // آیکون کیا دِو
+  Code2, // آیکون کیا دِو
+  Sparkles // آیکون قلاب جادویی
 } from "lucide-react";
 import Link from "next/link";
 
-// لیست کامل ۸ همکار تجاری و پروژه (بدون لوکس شاپ)
+// لیست کامل ۹ همکار تجاری و پروژه (بدون لوکس شاپ)
 const partners = [
   // 1. Tivan Ex
   {
@@ -70,7 +71,7 @@ const partners = [
     borderColor: "group-hover:border-orange-500/50",
     glow: "group-hover:shadow-orange-500/20"
   },
-  // 5. Coconut (جایگزین لوکس شاپ شد)
+  // 5. Coconut
   {
     id: 5,
     title: "فروشگاه آنلاین کوکونات",
@@ -121,12 +122,26 @@ const partners = [
     bgIcon: "bg-rose-50",
     borderColor: "group-hover:border-rose-500/50",
     glow: "group-hover:shadow-rose-500/20"
+  },
+  // 9. Gholab Jadooi
+  {
+    id: 9,
+    title: "قلاب جادویی | دست‌بافت‌های فانتزی",
+    description: "فروشگاه آنلاین و تخصصی دست‌بافت‌های فانتزی، عروسک‌های آمیگورومی و دسته گل‌های کاموایی جاودان. خلق شده با ظرافت و هنر دست.",
+    features: ["فروشگاه آنلاین", "دست‌سازه", "E-Commerce"],
+    url: "https://www.gholabjadooi.ir", 
+    icon: Sparkles,
+    color: "text-pink-600",
+    bgIcon: "bg-pink-50",
+    borderColor: "group-hover:border-pink-500/50",
+    glow: "group-hover:shadow-pink-500/20"
   }
 ];
 
 export default function PartnersPage() {
   return (
-    <div className="min-h-screen bg-gray-50 pt-24 pb-10 px-4 sm:px-8 relative overflow-hidden font-sans">
+    // حذف font-sans برای لود شدن فونت زیبای اختصاصی پروژه
+    <div className="min-h-screen bg-gray-50 pt-24 pb-10 px-4 sm:px-8 relative overflow-hidden">
       
       {/* پترن پس‌زمینه */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[100px] pointer-events-none" />
@@ -151,56 +166,61 @@ export default function PartnersPage() {
 
         {/* گرید کارت‌ها */}
         <div className="grid gap-6 md:grid-cols-2">
-          {partners.map((partner) => (
-            <a
-              key={partner.id}
-              href={partner.url}
-              target="_blank"
-              rel="dofollow" 
-              className={`group relative flex flex-col justify-between rounded-3xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${partner.borderColor} ${partner.glow}`}
-            >
-              <div>
-                {/* هدر کارت */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className={`rounded-2xl p-3 ${partner.bgIcon} ${partner.color}`}>
-                    <partner.icon size={28} strokeWidth={1.5} />
+          {partners.map((partner) => {
+            // رفع خطای ری‌اکت و تایپ‌اسکریپت
+            const Icon = partner.icon;
+
+            return (
+              <a
+                key={partner.id}
+                href={partner.url}
+                target="_blank"
+                rel="dofollow" 
+                className={`group relative flex flex-col justify-between rounded-3xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${partner.borderColor} ${partner.glow}`}
+              >
+                <div>
+                  {/* هدر کارت */}
+                  <div className="flex items-start justify-between mb-4">
+                    <div className={`rounded-2xl p-3 ${partner.bgIcon} ${partner.color}`}>
+                      <Icon size={28} strokeWidth={1.5} />
+                    </div>
+                    <div className="rounded-full bg-gray-50 border border-gray-200 px-3 py-1 flex items-center gap-1">
+                       <Briefcase size={12} className="text-gray-400" />
+                      <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Partner</span>
+                    </div>
                   </div>
-                  <div className="rounded-full bg-gray-50 border border-gray-200 px-3 py-1 flex items-center gap-1">
-                     <Briefcase size={12} className="text-gray-400" />
-                    <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Partner</span>
+
+                  <h2 className="mb-3 text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                    {partner.title}
+                  </h2>
+                  
+                  <p className="text-sm leading-7 text-gray-600 mb-6 text-justify">
+                    {partner.description}
+                  </p>
+
+                  {/* تگ‌ها */}
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {partner.features.map((feature, idx) => (
+                      <span key={idx} className="text-[11px] bg-gray-50 text-gray-600 border border-gray-200 px-2.5 py-1 rounded-lg font-medium">
+                        {feature}
+                      </span>
+                    ))}
                   </div>
                 </div>
 
-                <h2 className="mb-3 text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                  {partner.title}
-                </h2>
-                
-                <p className="text-sm leading-7 text-gray-600 mb-6 text-justify">
-                  {partner.description}
-                </p>
-
-                {/* تگ‌ها */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {partner.features.map((feature, idx) => (
-                    <span key={idx} className="text-[11px] bg-gray-50 text-gray-600 border border-gray-200 px-2.5 py-1 rounded-lg font-medium">
-                      {feature}
-                    </span>
-                  ))}
+                {/* فوتر کارت */}
+                <div className="mt-auto border-t border-gray-100 pt-4 flex items-center justify-between">
+                  <span className={`text-xs font-bold transition-colors ${partner.color}`}>
+                    بازدید از وب‌سایت
+                  </span>
+                  <div className="flex items-center gap-1 text-gray-400 group-hover:text-gray-600 transition-colors">
+                    <span className="text-xs font-mono hidden sm:inline-block dir-ltr">{partner.url.replace('https://', '')}</span>
+                    <ExternalLink size={14} />
+                  </div>
                 </div>
-              </div>
-
-              {/* فوتر کارت */}
-              <div className="mt-auto border-t border-gray-100 pt-4 flex items-center justify-between">
-                <span className={`text-xs font-bold transition-colors ${partner.color}`}>
-                  بازدید از وب‌سایت
-                </span>
-                <div className="flex items-center gap-1 text-gray-400 group-hover:text-gray-600 transition-colors">
-                  <span className="text-xs font-mono hidden sm:inline-block dir-ltr">{partner.url.replace('https://', '')}</span>
-                  <ExternalLink size={14} />
-                </div>
-              </div>
-            </a>
-          ))}
+              </a>
+            );
+          })}
         </div>
       </div>
     </div>
